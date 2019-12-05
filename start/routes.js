@@ -20,6 +20,7 @@ const Database = use("Database");
 Route.get("/", async () => {
   return await Database.table("sys_user").select("*");
 });
+//更改路由之后需要重启服务
 //Route.get("/", "SiteController.index");
 Route.get("/login", "UserController.login");
 Route.get("/info/:id", "UserController.info");
