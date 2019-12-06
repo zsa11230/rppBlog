@@ -3,8 +3,11 @@
 const Database = use("Database");
 
 class UserController {
-  login({ request }) {
-    return request.input("username");
+  login({ request , view}) {
+    //return request.input("username");
+    return view.render('login',{
+      username : 'rcg'
+    })
   }
 
   async info({ params }) {
