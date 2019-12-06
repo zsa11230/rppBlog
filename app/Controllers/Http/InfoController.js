@@ -4,11 +4,15 @@ const Database = use("Database");
 
 class InfoController {
   //分页查询
-  async page({ request }) {
+  async page({ request , view}) {
     const current = request.input("current");
     const size = request.input("size");
-    const page = await Database.from("sys_info").forPage(current, size);
-    return page;
+    const pages = await Database.from("sys_info").paginate(current, size);
+
+    return view.render('page',{
+      pages,
+      data : pages.data
+    })
   }
 
   //查看详情

@@ -18,6 +18,7 @@ const Route = use("Route");
 const Database = use("Database");
 
 Route.on('/').render('welcome');
+//Route.get("/", "InfoController.page");
 // Route.get("/", async () => {
 //   return await Database.table("sys_user").select("*");
 // });
