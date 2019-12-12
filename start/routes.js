@@ -28,3 +28,7 @@ Route.get("/login", "UserController.login");
 Route.get("/info/:id", "UserController.info");
 Route.get("/create", "InfoController.create");
 Route.get("/page", "InfoController.page");
+
+//登录
+Route.get("/user/login", "UserController.userLogin");//.middleware('auth:session');
+

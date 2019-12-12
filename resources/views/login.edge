@@ -15,10 +15,10 @@
 	<div id="output">
 		<div class="containerT">
 			<h1>用户登录</h1>
-			<form class="form" id="entry_form">
-				<input type="text" placeholder="用户名" id="username">
-				<input type="password" placeholder="密码" id="password">
-				<button type="button" id="entry_btn">登录</button>
+			<form class="form" id="entry_form" method="GET" action="/user/login">
+				<input type="text" placeholder="用户名" id="username" name="username">
+				<input type="password" placeholder="密码" id="password" name="password">
+				<button type="submit" id="entry_btn">登录</button>
 				<div id="prompt" class="prompt"></div>
 			</form>
 		</div>
