@@ -17,11 +17,12 @@ class UserController {
       'password': password
     });
 
-    console.log(user);
-
-    await auth.attempt(1,password);
-
-    return user;
+    if(user.length > 0){
+      return '登录成功！';
+    }
+    else{
+      return '用户名或密码错误！';
+    }
   }
 
   async info({ params }) {
