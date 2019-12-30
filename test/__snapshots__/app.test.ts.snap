@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hello koa-typescript-cli 1`] = `"{\\"code\\":0,\\"msg\\":\\"success\\",\\"data\\":\\"hello world koa-typescript-cli\\"}"`;
