@@ -1,0 +1,56 @@
+{
+  "editor.autoIndent": true,
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.mouseWheelZoom": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.snippetSuggestions": "top",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "autoFix": true,
+      "language": "html"
+    },
+    {
+      "autoFix": true,
+      "language": "vue"
+    }
+  ],
+  "extensions.ignoreRecommendations": false,
+  "files.associations": {
+    "*.env.mock": "dotenv",
+    "*.env.mock.local": "dotenv",
+    "*.wxa": "vue",
+    "*.wxc": "vue",
+    "*.wxp": "vue"
+  },
+  "files.autoSave": "onFocusChange",
+  "files.autoSaveDelay": 1000,
+  "files.eol": "auto",
+  "git.autofetch": true,
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": true
+  },
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "typescript.locale": "zh-CN",
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "end_with_newline": false,
+      "wrap_attributes": "auto",
+      "wrap_line_length": 0
+    }
+  },
+  "window.zoomLevel": 0,
+  "workbench.editor.tabSizing": "shrink"
+}

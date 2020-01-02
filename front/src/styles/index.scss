@@ -1,0 +1,64 @@
+.form-detail {
+  label {
+    color: #606266;
+  }
+  .form-half {
+    width: 50%;
+    display: inline-block;
+  }
+  .el-select,
+  .el-date-editor,
+  .el-input-number,
+  .el-cascader {
+    width: 100%;
+  }
+}
+.iep-btn-block {
+  display: block;
+  width: 100%;
+}
+.iep-page-form .el-form {
+  margin-right: 16%;
+  margin-top: 30px;
+}
+
+.iep-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+.iep-ellipsis-flex {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.iep-basic-scroll::-webkit-scrollbar,
+.iep-basic-scroll .el-table__body-wrapper::-webkit-scrollbar {
+  border-radius: 10px;
+  width: 6px;
+}
+
+.iep-basic-scroll::-webkit-scrollbar-track,
+.iep-basic-scroll .el-table__body-wrapper::-webkit-scrollbar-track {
+  border-radius: 10px;
+  transition: 0.3s background-color;
+  transition: 0.3s background-color;
+}
+
+.iep-basic-scroll::-webkit-scrollbar-thumb,
+.iep-basic-scroll .el-table__body-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ddd;
+  transition: 0.3s background-color;
+  display: none;
+  transition: all 0.5s;
+}
+
+.iep-basic-scroll:hover::-webkit-scrollbar-thumb,
+.iep-basic-scroll .el-table__body-wrapper:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
