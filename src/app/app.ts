@@ -5,7 +5,6 @@ import koaJwt from "koa-jwt";
 import config from "../config/config";
 import * as resultUtil from "../utils/result.util";
 import indexController from "../controllers/index.controller";
-import movieController from "../controllers/movie.controller";
 import userController from "../controllers/user.controller";
 import authController from "../controllers/auth.controller";
 import roleController from "../controllers/role.controller";
@@ -36,8 +35,6 @@ app.use(
 
 // Route middleware.
 app.use(indexController.routes()).use(indexController.allowedMethods());
-
-app.use(movieController.routes()).use(movieController.allowedMethods());
 
 app.use(userController.routes()).use(userController.allowedMethods());
 

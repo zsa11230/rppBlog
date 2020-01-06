@@ -9,8 +9,27 @@ export async function findAll(): Promise<infoEntity[]> {
   const infoRepo: Repository<infoEntity> = getRepository(infoEntity);
   // Find the requested info.
   const infos = await infoRepo.find();
+  const infoss = await infoRepo.query;
   return infos;
 }
+
+/**
+ * 分页查询
+ */
+export async function findPage(
+  current: number,
+  size: number
+): Promise<infoEntity[]> {
+  // Get the info repository from TypeORM.
+  const infoRepo: Repository<infoEntity> = getRepository(infoEntity);
+  // Find the requested info.
+  const infos = await infoRepo.createQueryBuilder("infoEntity").orderBy("info.id", "DESC")
+    .skip(1)
+    .take(10);
+
+  return infos;
+}
+
 /**
  * 通过ID查询
  * @param infoId
