@@ -16,3 +16,11 @@ export const getInfoList = () => {
     method: 'get',
   })
 }
+
+export const getInfoPage = (params) => {
+  return request({
+    url: `${prefix}/page`,
+    method: 'get',
+    params,
+  })
+}

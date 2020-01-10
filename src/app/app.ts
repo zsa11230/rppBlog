@@ -29,7 +29,7 @@ app.use(bodyParser());
 
 app.use(
   koaJwt({ secret: config.jwtSecret }).unless({
-    path: [/^\/auth\/login/, /^\/auth\/register/, /^\/infos\/page/]
+    path: [/^\/auth\/login/, /^\/auth\/register/, /^\/infos\/page/, /^\/index\/index/]
   })
 );
 

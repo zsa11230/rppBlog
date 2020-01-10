@@ -3,5 +3,8 @@
     "prettier.eslintIntegration": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.fontSize": 16
+    "editor.fontSize": 16,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }
