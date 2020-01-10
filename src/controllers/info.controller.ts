@@ -22,8 +22,8 @@ router.get("/", async (ctx: Koa.Context) => {
  * 获取分页
  */
 router.get("/page", async (ctx: Koa.Context) => {
-  const users = await infoServices.findPage();
-  //ctx.body = resultUtil.success(users);
+  const infos = await infoServices.findPage(+ctx.query.current, +ctx.query.size);
+  ctx.body = resultUtil.success(infos);
 });
 
 /**
