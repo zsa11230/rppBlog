@@ -71,3 +71,13 @@ export async function updateSome(
   const updatedinfo = await infoRepo.merge(info, infoBody);
   return updatedinfo;
 }
+
+
+//定时任务
+// var schedule = require('node-schedule');
+// function scheduleCronstyle() {
+//   schedule.scheduleJob('1-10 * * * * *', function () {
+//     console.log('scheduleCronstyle:' + new Date());
+//   });
+// }
+// scheduleCronstyle();

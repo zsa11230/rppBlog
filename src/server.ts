@@ -23,13 +23,4 @@ function startServe(): Promise<Koa<any, {}>> {
   });
 }
 
-//定时任务
-// var schedule = require('node-schedule');
-// function scheduleCronstyle() {
-//   schedule.scheduleJob('1-10 * * * * *', function () {
-//     console.log('scheduleCronstyle:' + new Date());
-//   });
-// }
-// scheduleCronstyle();
-
 export const eApp = startServe();
