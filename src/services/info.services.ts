@@ -3,6 +3,7 @@ import infoEntity from '../entity/info.entity'
 import Page from '../vo/page.vo'
 import http from 'http'
 import cheerio from 'cheerio'
+import moment from 'moment'
 
 /**
  * 查询所有
@@ -80,7 +81,7 @@ export async function updateSome(
 //定时任务
 var schedule = require('node-schedule')
 function scheduleCronstyle() {
-  schedule.scheduleJob('0 08 11 ? * Thu', function () {
+  schedule.scheduleJob('0 2 15 ? * Thu', function () {
     //爬虫参考网址https://www.cnblogs.com/bgwhite/p/9265959.html
     let url = 'http://novel.tingroom.com/'
 
@@ -99,20 +100,37 @@ function scheduleCronstyle() {
         //定义一个空数组，用来接收数据
         var result: any[] = []
         //分析文档结构  先获取每个li 再遍历里面的内容(此时每个li里面就存放着我们想要获取的数据)
-        $('.all001x li').each((index, value) => {
+        $('.all001x li').each(async (index, value) => {
           //地址和类型为一行显示，需要用到字符串截取
           //地址
           let title = $(value)
             .find('a')
             .eq(1)
             .html()
-          console.log(title)
 
           let address = $(value)
             .find('a')
             .eq(1)
             .attr('href')
-          console.log(address)
+
+          const infoRepo: Repository<infoEntity> = getRepository(infoEntity)
+          const searchInfo = new infoEntity();
+          searchInfo.title = title;
+          const count = await infoRepo.count(searchInfo)
+          if (count < 1) {
+            let info = new infoEntity()
+            info.title = title
+            info.address = address
+
+            const time = Date.now();
+            const day = moment(time).format('YYYY-MM-DD HH:mm');
+
+            info.createTime = day
+            info.updateTime = day
+
+            infoRepo.save(info)
+          }
+
         })
       })
     })

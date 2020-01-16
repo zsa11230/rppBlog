@@ -1,14 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 /**
- * 系统发布文章实体类
+ * 系统发布文章章节实体类
  */
 @Entity()
-export default class Info {
+export default class InfoChapterRelation {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true, comment: "标题" })
+  @Column({ unique: true, comment: "关联ID" })
+  relationId: string;
+
+  @Column({ unique: true, comment: "章节标题" })
   title: string;
 
   @Column({ comment: "地址" })
