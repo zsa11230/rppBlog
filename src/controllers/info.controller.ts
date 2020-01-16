@@ -27,14 +27,14 @@ router.get("/page", async (ctx: Koa.Context) => {
 });
 
 /**
- * 获取单个
+ * 获取章节列表
  */
-router.get("/:user_id", async (ctx: Koa.Context) => {
-  const user = await infoServices.findById(ctx.params.user_id);
-  if (!user) {
+router.get("/:info_id", async (ctx: Koa.Context) => {
+  const info = await infoServices.findById(ctx.params.info_id);
+  if (!info) {
     ctx.throw(HttpStatus.NOT_FOUND);
   }
-  ctx.body = resultUtil.success(user);
+  ctx.body = resultUtil.success(info);
 });
 /**
  * 创建
@@ -53,20 +53,6 @@ router.delete("/:user_id", async (ctx: Koa.Context) => {
   }
   await infoServices.del(ctx.params.user_id);
   ctx.status = HttpStatus.NO_CONTENT;
-});
-/**
- * 修改部分信息
- */
-router.patch("/:user_id", async (ctx: Koa.Context) => {
-  const user = await infoServices.findById(ctx.params.user_id);
-  if (!user) {
-    ctx.throw(HttpStatus.NOT_FOUND);
-  }
-  const updatedUser = await infoServices.updateSome(
-    ctx.params.user_id,
-    ctx.request.body
-  );
-  ctx.body = resultUtil.success(updatedUser);
 });
 
 export default router;
