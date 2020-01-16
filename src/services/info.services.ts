@@ -5,6 +5,7 @@ import Page from '../vo/page.vo'
 import http from 'http'
 import cheerio from 'cheerio'
 import moment from 'moment'
+import got from 'got'
 
 /**
  * 查询所有
@@ -56,57 +57,52 @@ export async function findById(infoId: string): Promise<InfoChapterRelation[]> {
     return result.sort(keysort('title', false))
   }
 
-  let relations;
+  let resultList
 
-  http.get(url, function (res) {
-    let chunks: any[] = [],
-      size = 0
-    res.on('data', function (chunk) {
-      chunks.push(chunk)
-      size += chunk.length
+  try {
+    const response = await got(url);
+    //cheerio也就是nodejs下的jQuery  将整个文档包装成一个集合，定义一个变量$接收
+    var $ = cheerio.load(response.body)
+    //定义一个空数组，用来接收数据
+    var result: any[] = []
+
+    let introduction = $('#infoLong').children().html()
+    //分析文档结构  先获取每个li 再遍历里面的内容(此时每个li里面就存放着我们想要获取的数据)
+    $('.clearfix li').each((index, value) => {
+      //地址和类型为一行显示，需要用到字符串截取
+      //地址
+      let title = $(value)
+        .find('a')
+        .html()
+
+      let address = $(value)
+        .find('a')
+        .attr('href')
+
+      if (title != null) {
+        let relation = new InfoChapterRelation()
+        relation.relationId = infoId
+        relation.title = title
+        relation.address = address
+        relation.introduction = introduction
+
+        const time = Date.now();
+        const day = moment(time).format('YYYY-MM-DD HH:mm');
+
+        relation.createTime = day
+        relation.updateTime = day
+        result.push(relation)
+      }
     })
-    res.on('end', function () {
-      let data = Buffer.concat(chunks, size)
-      let html = data.toString()
 
-      //cheerio也就是nodejs下的jQuery  将整个文档包装成一个集合，定义一个变量$接收
-      var $ = cheerio.load(html)
-      //定义一个空数组，用来接收数据
-      var result: any[] = []
+    for (const r of result) {
+      await relationRepo.save(r)
+    }
+  } catch (error) {
+    console.log(error.response.body);
+  }
 
-      let introduction = $('#infoLong').children().html()
-      //分析文档结构  先获取每个li 再遍历里面的内容(此时每个li里面就存放着我们想要获取的数据)
-      $('.clearfix li').each(async (index, value) => {
-        //地址和类型为一行显示，需要用到字符串截取
-        //地址
-        let title = $(value)
-          .find('a')
-          .html()
-
-        let address = $(value)
-          .find('a')
-          .attr('href')
-
-        if (title != null) {
-          let relation = new InfoChapterRelation()
-          relation.relationId = infoId
-          relation.title = title
-          relation.address = address
-          relation.introduction = introduction
-
-          const time = Date.now();
-          const day = moment(time).format('YYYY-MM-DD HH:mm');
-
-          relation.createTime = day
-          relation.updateTime = day
-          relationRepo.save(relation)
-        }
-      })
-      relations = relationRepo.find(searchInfo)
-    })
-  })
-
-  return relations
+  return await relationRepo.createQueryBuilder('InfoChapterRelation').getMany()
 }
 
 /**
