@@ -8,11 +8,14 @@ export default class InfoContentRelation {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true, comment: "关联ID" })
+  @Column({ comment: "关联ID" })
   relationId: string;
 
-  @Column({ comment: "内容" })
+  @Column({ comment: "标题" })
   title: string;
+
+  @Column({ comment: "内容", type: "text" })
+  content: string;
 
   @Column({ nullable: true, comment: "创建时间" })
   createTime: string;

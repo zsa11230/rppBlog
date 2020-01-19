@@ -30,12 +30,24 @@ router.get("/page", async (ctx: Koa.Context) => {
  * 获取章节列表
  */
 router.get("/:info_id", async (ctx: Koa.Context) => {
-  const info = await infoServices.findById(ctx.params.info_id);
-  if (!info) {
+  const chapter = await infoServices.findById(ctx.params.info_id);
+  if (!chapter) {
     ctx.throw(HttpStatus.NOT_FOUND);
   }
-  ctx.body = resultUtil.success(info);
+  ctx.body = resultUtil.success(chapter);
 });
+
+/**
+ * 获取文章详情
+ */
+router.get("/chapter/:chapter_id", async (ctx: Koa.Context) => {
+  const content = await infoServices.findContentByChapterId(ctx.params.chapter_id);
+  if (!content) {
+    ctx.throw(HttpStatus.NOT_FOUND);
+  }
+  ctx.body = resultUtil.success(content);
+});
+
 /**
  * 创建
  */
