@@ -54,10 +54,9 @@ export async function findById(infoId: string): Promise<InfoChapterRelation[]> {
 
   if (count > 1) {
     let result = await relationRepo.find(searchInfo)
-    return result.sort(keysort('title', false))
+    return await relationRepo.createQueryBuilder('InfoChapterRelation')
+      .where(searchInfo).orderBy('address', 'ASC').getMany()
   }
-
-  let resultList
 
   try {
     const response = await got(url);
@@ -102,7 +101,8 @@ export async function findById(infoId: string): Promise<InfoChapterRelation[]> {
     console.log(error.response.body);
   }
 
-  return await relationRepo.createQueryBuilder('InfoChapterRelation').getMany()
+  return await relationRepo.createQueryBuilder('InfoChapterRelation')
+    .where(searchInfo).orderBy('address', 'ASC').getMany()
 }
 
 /**
@@ -139,7 +139,7 @@ export async function del(infoId: string): Promise<void> {
 //定时任务
 var schedule = require('node-schedule')
 function scheduleCronstyle() {
-  schedule.scheduleJob('0 2 15 ? * Thu', function () {
+  schedule.scheduleJob('0 45 14 ? * Sun', function () {
     //爬虫参考网址https://www.cnblogs.com/bgwhite/p/9265959.html
     let url = 'http://novel.tingroom.com/'
 
